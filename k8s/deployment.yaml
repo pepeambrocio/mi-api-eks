@@ -12,10 +12,15 @@ spec:
     metadata:
       labels:
         app: mi-api
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "mi-api"
+        vault.hashicorp.com/agent-inject-secret-config: "secret/data/mi-api"
     spec:
+      serviceAccountName: mi-api-sa
       containers:
       - name: mi-api
-        image: hashicorp/http-echo    # imagen de prueba, devuelve texto
+        image: hashicorp/http-echo
         args:
           - "-text=Hola desde mi API en EKS!"
         ports:

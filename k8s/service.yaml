@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mi-api-svc
+  namespace: default
+spec:
+  selector:
+    app: mi-api
+  ports:
+  - port: 80
+    targetPort: 5678

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mi-api-ingress
+  namespace: default
+  annotations:
+    konghq.com/strip-path: "true"
+    konghq.com/plugins: rate-limit,cors
+spec:
+  ingressClassName: kong
+  rules:
+  - http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: mi-api-svc
+            port:
+              number: 80

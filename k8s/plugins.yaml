@@ -1,0 +1,29 @@
+# Rate Limiting — máximo 10 requests por minuto
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: rate-limit
+  namespace: default
+plugin: rate-limiting
+config:
+  minute: 10
+  policy: local
+---
+# CORS — permite llamadas desde el browser
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: cors
+  namespace: default
+plugin: cors
+config:
+  origins:
+    - "*"
+  methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+  headers:
+    - Authorization
+    - Content-Type
